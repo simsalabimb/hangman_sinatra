@@ -1,8 +1,7 @@
 require 'sinatra'
 require 'sinatra/reloader' if development? 
-require './game_play.rb' #refactoring game
+require './game_play.rb'
 
-# https://github.com/Javier-Machin/hangman_app/blob/master/hangman.rb . Put everything into file, game method on hangman page
 def secret_word
   file = File.open("dictionary.txt")
   file_data = file.readlines  
