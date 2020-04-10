@@ -1,0 +1,62 @@
+<html>
+<head>
+  <style>
+  #content {
+    max-width: 500px;
+    margin: auto;
+    background-color: #cee4f3;
+  }
+
+  input[type=text] {
+      padding: 10px 12px;
+      margin: 10px 5px; 
+      border: 4px solid black;
+  }
+  input[type=submit] {
+      width: 20%;
+      padding: 10px 12px;
+      margin-left: 160px;
+      border: 4px solid orange;
+  }
+
+  .display {
+    margin-left: 160px;
+  }
+
+  p {
+    color: navy;
+  }
+  </style>
+</head>
+<body id = "content">
+<h1> WELCOME TO HANGMAN<br></h1>
+
+<h3>You have <%= count %> tries to guess the secret word.</h2>
+
+    <h1>
+      <% if blanks.is_a? String %>
+        <%= blanks %>
+      <% else %> 
+      <%= blanks.join(" ") %>
+      <% end %>
+    </h1>
+
+ <p>
+     WRONG: <%= wrong%>
+  </p>
+
+  <form lass = "button" method="POST" action="/letter">
+  <p> <strong>Enter Letter:</strong> <input type='text' name='letter' /></p><br>
+ <input type='submit' value='GUESS' />   
+</form>
+
+<div class = "display">
+    <% display.each do |index| %>
+      <pre> <%= index %> </pre>
+
+    <% end %>
+</div>
+
+
+</body>
+</html>
