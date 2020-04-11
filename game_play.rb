@@ -29,7 +29,7 @@ class Game
     def game(guess)
         @wrong_guess = false
         
-        if  @wrong.length < 8 && @blanks.any?("_")
+        if  @wrong.length < 9 && @blanks.any?("_")
             i = 0
             while i < @word.length
                 @word.each_char do |letter|
