@@ -36,7 +36,7 @@ hangman = Game.new($word)
 
   get '/letter' do
     letter = params["letter"]
-    hangman.game(letter)
+    hangman.game(letter.downcase)
     blanks = hangman.display
     redirect '/'
   end
