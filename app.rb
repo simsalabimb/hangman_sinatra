@@ -2,6 +2,8 @@ require 'sinatra'
 require 'sinatra/reloader' if development? 
 require './game_play.rb'
 
+enable :sessions
+
 def secret_word
   file = File.open("dictionary.txt")
   file_data = file.readlines  
@@ -21,21 +23,26 @@ end
 $word = secret_word
 hangman = Game.new($word)
 
-get '/' do
+  get '/' do
+    blanks = hangman.display
+    wrong = hangman.wrong
+    wrong_guess = hangman.wrong_guess
+    display = hangman.display_hangman
+    count = hangman.count
 
-  blanks = hangman.display
-  wrong = hangman.wrong
-  wrong_guess = hangman.wrong_guess
-  display = hangman.display_hangman
-  count = hangman.count
+    erb :index,
+    :locals => {:word => $word, :blanks => blanks,:wrong_guess => wrong_guess, :wrong => wrong, :display => display, :count => count }
+  end
 
-  erb :index,
-  :locals => {:word => $word, :blanks => blanks,:wrong_guess => wrong_guess, :wrong => wrong, :display => display, :count => count }
-end
+  get '/letter' do
+    letter = params["letter"]
+    hangman.game(letter)
+    blanks = hangman.display
+    redirect '/'
+  end
 
-post '/letter' do
-  letter = params["letter"]
-  hangman.game(letter)
-  blanks = hangman.display
-  redirect '/'
-end
+  post '/reset' do
+    word = secret_word
+    hangman = Game.new(word)
+    redirect '/'
+  end

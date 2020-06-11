@@ -45,10 +45,14 @@
      WRONG: <%= wrong%>
   </p>
 
-  <form lass = "button" method="POST" action="/letter">
-  <p> <strong>Enter Letter:</strong> <input type='text' name='letter' /></p><br>
- <input type='submit' value='GUESS' />   
-</form>
+  <form lass = "button" method="PUT" action="/letter">
+    <p> <strong>Enter Letter:</strong> <input type='text' name='letter' /></p><br>
+    <input type='submit' value='GUESS' />  
+  </form>
+
+  <form method="post" action="/reset">
+    <input type='submit' value='Reset'>
+  </form>
 
 <div class = "display">
     <% display.each do |index| %>
